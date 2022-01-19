@@ -20,5 +20,5 @@ public class MailInbox {
     public List<WebElement> inbox(){
         List<WebElement> list = driver.findElements(letter);
     return list;
-    };
+    }
 }
