@@ -1,15 +1,17 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import pages.*;
-
+import java.io.*;
 import java.time.Duration;
-import java.util.ArrayList;
+import java.util.Properties;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        /* File file = new File("C:\\config.properties");
+        Properties properties = new Properties();
+        properties.load(new FileReader(file)); */
+
         System.setProperty("webdriver.chrome.driver","C:\\tools\\webdrivers\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://mail.ru/");
@@ -22,12 +24,12 @@ public class Main {
         mailLogin.enterUserName("example-test");
         mailLogin.clickPass();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-        mailLogin.enterPassword("A)trO3uTIuy2");
-        mailLogin.clickLogin();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-        int num = driver.findElements(By.xpath("/html/body/div[5]/div/div[1]/div[1]/div/div[2]/span/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div")).size();
+        mailLogin.enterPassword("lu&rrrTLJA13");
+        mailLogin. clickLogin();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 
-        System.out.println("You have " +num+" messages inside Inbox folder");
+        System.out.println("You have " +mailInbox.inbox().size()+" messages inside Inbox folder");
+        driver.manage().deleteAllCookies();
         driver.close();
 
     }
