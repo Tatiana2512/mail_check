@@ -6,26 +6,38 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        /* File file = new File("C:\\config.properties");
-        Properties properties = new Properties();
-        properties.load(new FileReader(file)); */
+        Properties prop = new Properties();
+        InputStream input = null;
+        try{
+            input=new FileInputStream("src/test/resources/config.properties");
+            prop.load(input);
+        } catch (
+                IOException ex){ex.printStackTrace();}
+        finally {
+            if (input != null){
+                try {input.close();}
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         System.setProperty("webdriver.chrome.driver","C:\\tools\\webdrivers\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-        driver.get("https://mail.ru/");
+        driver.get(prop.getProperty("url"));
 
         MailLogin mailLogin = new MailLogin(driver);
 
         MailInbox mailInbox = new MailInbox(driver);
 
-        mailLogin.emailDomain("@inbox.ru");
-        mailLogin.enterUserName("example-test");
+        mailLogin.emailDomain(prop.getProperty("domain"));
+        mailLogin.enterUserName(prop.getProperty("login"));
         mailLogin.clickPass();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-        mailLogin.enterPassword("lu&rrrTLJA13");
-        mailLogin. clickLogin();
+        mailLogin.enterPassword(prop.getProperty("password"));
+        mailLogin.clickLogin();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 
         System.out.println("You have " +mailInbox.inbox().size()+" messages inside Inbox folder");
