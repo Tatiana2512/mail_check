@@ -40,9 +40,7 @@ public class MailLogin {
             driver.findElement(By.xpath("//button[@data-testid='enter-password']")).click();
         }
 
-        public void open(){
-            driver.get("https://mail.ru/");
-        }
+
         boolean atPage(){
             if(driver.getTitle().equals("Mail.ru: почта, поиск в интернете, новости, игры")) {
                 return true;
