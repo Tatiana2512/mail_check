@@ -24,7 +24,7 @@ public class Main {
             }
         }
 
-        System.setProperty("webdriver.chrome.driver","C:\\tools\\webdrivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver",prop.getProperty("driverPath"));
         WebDriver driver = new ChromeDriver();
         driver.get(prop.getProperty("url"));
 
